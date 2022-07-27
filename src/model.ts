@@ -12,13 +12,13 @@ const week_days = ['Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday
 
 export class Task implements TaskInterface{
     public constructor(
-        public title: string,
+        public _title: string,
         public start_day: number,
         public start_time: string,
         public end_day: number,
         private _end_time: string,
     ){
-        this.title = title;
+        this.title = _title;
         this.start_day = start_day;
         this.start_time = start_time;
         this.end_day = end_day;
@@ -32,6 +32,14 @@ export class Task implements TaskInterface{
         public day_name: string = week_days[this.start_day-1];
         public children: Task[] = this.setChildrenTask();
 
+        public get title(){
+            return this._title;
+        };
+
+        public set title(str: string){
+            this._title = str;
+        };
+        
         public get end_time(){
             return this._end_time;
         }
@@ -73,7 +81,7 @@ export class Task implements TaskInterface{
 
                 let childTask = new Task (this.title, child_start_day, child_start_time, child_end_day, child_end_time);
                 childTask.id = this.id+i;
-                childTask.parent_id = this.id*2;
+                childTask.parent_id = this.id;
                 childArr.push(childTask);
             }
             return childArr;
@@ -81,7 +89,7 @@ export class Task implements TaskInterface{
 
         printTask(){
             console.log(
-                'TITLE: ' + this.title +'\n'
+                'TITLE: ' + this.title + ' ID: ' + this.id + '\n'
                 + 'START: ' + this.start_day + " " + this.start_time + '\n'
                 + 'END: ' + this.end_day + " " + this.end_time + '\n'
                 + 'Duration: ' + this.duration + '\n'

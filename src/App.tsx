@@ -35,13 +35,13 @@ function App() {
         <h1>No tasks</h1>
          : 
          (<div className='week-container' >
-         <div className='day-container'>MONDAY <TasksDisplay tasks={mondayTasks} ></TasksDisplay></div>
-         <div className='day-container'>TUESDAY <TasksDisplay tasks={tuesdayTasks} ></TasksDisplay></div>
-         <div className='day-container'>WEDNESDAY<TasksDisplay tasks={wednesdayTasks} ></TasksDisplay></div>
-         <div className='day-container'>THURSDAY<TasksDisplay tasks={thursdayTasks} ></TasksDisplay> </div>
-         <div className='day-container'>FRIDAY<TasksDisplay tasks={fridayTasks} ></TasksDisplay> </div>
-         <div className='day-container'>SATURDAY<TasksDisplay tasks={saturdayTasks} ></TasksDisplay> </div>
-         <div className='day-container'>SUNDAY<TasksDisplay tasks={sundayTasks} ></TasksDisplay> </div>
+         <div className='day-container'>MONDAY <TasksDisplay tasks={mondayTasks} setTasks={setTasks} ></TasksDisplay></div>
+         <div className='day-container'>TUESDAY <TasksDisplay tasks={tuesdayTasks} setTasks={setTasks}></TasksDisplay></div>
+         <div className='day-container'>WEDNESDAY<TasksDisplay tasks={wednesdayTasks} setTasks={setTasks}></TasksDisplay></div>
+         <div className='day-container'>THURSDAY<TasksDisplay tasks={thursdayTasks} setTasks={setTasks}></TasksDisplay> </div>
+         <div className='day-container'>FRIDAY<TasksDisplay tasks={fridayTasks} setTasks={setTasks}></TasksDisplay> </div>
+         <div className='day-container'>SATURDAY<TasksDisplay tasks={saturdayTasks} setTasks={setTasks}></TasksDisplay> </div>
+         <div className='day-container'>SUNDAY<TasksDisplay tasks={sundayTasks} setTasks={setTasks}></TasksDisplay> </div>
          </div>)
         }
 

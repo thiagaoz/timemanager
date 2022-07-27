@@ -16,14 +16,6 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
     const endDayRef = useRef<HTMLSelectElement>(null);
     const endTimeRef = useRef<HTMLInputElement>(null);
 
-    const handleMultDaysTaks = (parentTask: Task)  =>{
-        if (parentTask.duration === 0) return parentTask;
-
-        for (let i=1;i<=parentTask.duration;i++){
-            
-        }
-    }
-
     const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -35,13 +27,7 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
             console.log(`ERRO: ${newTask.title} - START: ${week_days[newTask.start_day]} ${newTask.start_time} END: ${week_days[newTask.end_day]} ${newTask.end_time}`);
             return false;
         }
-/*
-        if (newTask.start_date > newTask.end_date){
-            alert("End before Start");
-            console.log(`ERRO: ${newTask.title} - START: ${week_days[newTask.start_day]} ${newTask.start_time} END: ${week_days[newTask.end_day]} ${newTask.end_time}`);
-            return false;
-        }
-*/
+
         if(tasks.length === 0) {
             setTasks([newTask])
         }
