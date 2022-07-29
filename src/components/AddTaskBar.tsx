@@ -1,4 +1,5 @@
 import React, { useRef} from 'react'
+import { checkConflict, setChildrenTask, sortTasks } from './CustomFunctions';
 import { Task } from '../model';
 
 interface Props {
@@ -33,33 +34,14 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
         }
 
         else{
-            let conflit: Task[] = [];
-            for (let task of tasks) {
-                if (newTask.start_date < task.start_date && newTask.end_date <= task.start_date){
-                    continue;
-                }
-                else if (newTask.start_date >= task.end_date && newTask.end_date > task.end_date){
-                    continue;
-                }
-                else {
-                    conflit.push(task);
-                    console.log('Conflit with '+ task.title);
-                }
-            }
-            if (conflit.length>0) {
-                alert('Conflit with ' + conflit.length + ' tasks');
-                return false;
-            };
+            checkConflict(newTask, tasks);
         }
         
-        if (newTask.children.length > 0) newTask.end_time = '23:59'
-        newTask.printTask();
+        setChildrenTask(newTask);
+        //newTask.printTask();
         
-        const sortedTasks = ([...tasks, newTask, ...newTask.children]);
-        sortedTasks.sort((a,b) => a.start_date - b.start_date);
-        setTasks(sortedTasks);
+        setTasks(sortTasks(newTask, tasks));
         
-        //newTask.start.day = newTask.end.day= {num:'1', name: 'Monday'};  
         formRef.current?.reset();
         inputRef.current?.focus();
     }
@@ -67,7 +49,7 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
   return (
     <div>
         <form ref={formRef} onSubmit={(e)=>{handleAdd(e)}}>
-            <input type='input' placeholder='New task title' className='input__filed' ref={inputRef}
+            <input type='input' defaultValue='Cafe da manhã' className='input__filed' ref={inputRef}
                 autoFocus required></input>
                 <br></br>
                 START  
@@ -81,7 +63,7 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
                 <option value='7'>Sunday</option>
             </select>
 
-            <input className='start__field' type='time' step='60' ref={startTimeRef} required></input>
+            <input className='start__field' type='time' step='60' defaultValue='06:00' ref={startTimeRef} required></input>
             <br></br>
             END  
             <select className='week_day' ref={endDayRef} required>
@@ -93,7 +75,7 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
                 <option value='6'>Saturday</option>
                 <option value='7'>Sunday</option>
             </select>
-            <input className='end__field' type='time' step='60' ref={endTimeRef} required></input>
+            <input className='end__field' type='time' step='60' ref={endTimeRef} defaultValue='08:00' required></input>
             <br></br>
             <button className='input__submit' type='submit'>ADD</button>
         </form>

@@ -25,12 +25,15 @@ export class Task implements TaskInterface{
         this.end_time= _end_time;
         }
         public id = Date.now();
-        public parent_id: number | undefined;
+        public parent_id: number  = 0;
         public start_date: number = this.setDate(this.start_day, this.start_time);
         public end_date: number = this.setDate(this.end_day, this.end_time);
         public duration: number = this.setDuration();
-        public day_name: string = week_days[this.start_day-1];
-        public children: Task[] = this.setChildrenTask();
+        public start_day_name: string = week_days[this.start_day-1];
+        public end_day_name: string = week_days[this.end_day-1];
+        public children: Task[] = [];
+        public original_end_day: number = this.end_day;
+        public original_end_time: string = this.end_time;
 
         public get title(){
             return this._title;
@@ -57,7 +60,7 @@ export class Task implements TaskInterface{
             else return this.end_day - this.start_day;
         }
 
-        setChildrenTask(): Task[] {
+        setChildrenTask2(): Task[] {
             const childArr: Task[] = [];
 
             let child_start_day: number = 0;
@@ -88,13 +91,24 @@ export class Task implements TaskInterface{
         }
 
         printTask(){
-            console.log(
-                'TITLE: ' + this.title + ' ID: ' + this.id + '\n'
-                + 'START: ' + this.start_day + " " + this.start_time + '\n'
-                + 'END: ' + this.end_day + " " + this.end_time + '\n'
-                + 'Duration: ' + this.duration + '\n'
-                + 'Childrens: '  + this.children.length
-            )
+            if(!this.parent_id){
+                console.log(
+                    'TITLE: ' + this.title + ' ID: ' + this.id + '\n'
+                    + 'START: ' + this.start_day + " " + this.start_time + '\n'
+                    + 'END: ' + this.end_day + " " + this.end_time + '\n'
+                    + 'Duration: ' + this.duration + '\n'
+                    + 'Childrens: '  + this.children.length
+                )
+            }
+            if(this.parent_id){
+                console.log(
+                    'TITLE: ' + this.title + ' ID: ' + this.id + '\n'
+                    + 'START: ' + this.start_day + " " + this.start_time + '\n'
+                    + 'END: ' + this.end_day + " " + this.end_time + '\n'
+                    + 'Duration: ' + this.duration + '\n'
+                    + 'Child Nº: '  + (this.id - this.parent_id)
+                );
+            }
             if (this.children.length > 0 ){
                 console.log('--- CHILDREDN --- ')
                 for (let child of this.children){

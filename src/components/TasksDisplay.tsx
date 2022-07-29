@@ -4,13 +4,14 @@ import { SingleTask } from './SingleTask';
 
 interface Props {
     tasks: Task[],
+    dayTasks: Task[],
     setTasks:  React.Dispatch<React.SetStateAction<Task[]>>
 }
 
-const TasksDisplay = ({tasks, setTasks}: Props) => {
+const TasksDisplay = ({tasks, setTasks, dayTasks}: Props) => {
 
     return <div>
-        {tasks.map( task =>
+        {dayTasks.map( task =>
             <SingleTask task={task} key={task.id} tasks={tasks} setTasks={setTasks}></SingleTask>
         )}
         
