@@ -17,6 +17,12 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
     const endDayRef = useRef<HTMLSelectElement>(null);
     const endTimeRef = useRef<HTMLInputElement>(null);
 
+    const changeEndDay = (e: React.FormEvent)  => {
+        e.preventDefault();
+
+        if(startDayRef.current)  endDayRef.current!.value = startDayRef.current.value 
+    };
+
     const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -33,8 +39,8 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
             setTasks([newTask])
         }
 
-        else{
-            checkConflict(newTask, tasks);
+        if(checkConflict(newTask, tasks)) {
+            return false;
         }
         
         setChildrenTask(newTask);
@@ -47,41 +53,54 @@ const AddTaskBar = ({tasks, setTasks}: Props) => {
     }
 
   return (
-    <div>
+    <div className='addtask-container'>
         <form ref={formRef} onSubmit={(e)=>{handleAdd(e)}}>
-            <input type='input' defaultValue='Cafe da manhã' className='input__filed' ref={inputRef}
+            <input type='input' defaultValue='Breakfast' className='input__filed' ref={inputRef}
                 autoFocus required></input>
                 <br></br>
-                START  
-            <select className='week_day' ref={startDayRef} required>
-                <option value='1'>Monday</option>
-                <option value='2'>Tuesday</option>
-                <option value='3'>Wednesday</option>
-                <option value='4'>Thursday</option>
-                <option value='5'>Friday</option>
-                <option value='6'>Saturday</option>
-                <option value='7'>Sunday</option>
-            </select>
+            <div className="time-settings-container">
+                <div className="start-container">
+                    <div>
+                        <label htmlFor='week-day-start'>START</label> 
+                    </div>
+                    <div>
+                        <select className='week_day' ref={startDayRef} onChange={(e) => changeEndDay(e)} required>
+                            <option value='1'>Monday</option>
+                            <option value='2'>Tuesday</option>
+                            <option value='3'>Wednesday</option>
+                            <option value='4'>Thursday</option>
+                            <option value='5'>Friday</option>
+                            <option value='6'>Saturday</option>
+                            <option value='7'>Sunday</option>
+                        </select>
+                    </div>
 
-            <input className='start__field' type='time' step='60' defaultValue='06:00' ref={startTimeRef} required></input>
-            <br></br>
-            END  
-            <select className='week_day' ref={endDayRef} required>
-                <option value='1'>Monday</option>
-                <option value='2'>Tuesday</option>
-                <option value='3'>Wednesday</option>
-                <option value='4'>Thursday</option>
-                <option value='5'>Friday</option>
-                <option value='6'>Saturday</option>
-                <option value='7'>Sunday</option>
-            </select>
-            <input className='end__field' type='time' step='60' ref={endTimeRef} defaultValue='08:00' required></input>
-            <br></br>
+                    <div>
+                        <input className='start__field' type='time' step='60' defaultValue='06:00' ref={startTimeRef} required></input>
+                    </div>
+                </div>
+                <div className="end-container">
+                    <div>
+                        <label htmlFor='week-day-end'>END</label> 
+                    </div>
+                    <div>
+                        <select id='week-day-end' className='week_day' ref={endDayRef} required>
+                            <option value='1'>Monday</option>
+                            <option value='2'>Tuesday</option>
+                            <option value='3'>Wednesday</option>
+                            <option value='4'>Thursday</option>
+                            <option value='5'>Friday</option>
+                            <option value='6'>Saturday</option>
+                            <option value='7'>Sunday</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input className='end__field' type='time' step='60' ref={endTimeRef} defaultValue='08:00' required></input>
+                    </div>
+                </div>
+            </div>
             <button className='input__submit' type='submit'>ADD</button>
         </form>
-
-
-
     </div>
   )
 }

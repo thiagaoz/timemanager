@@ -1,41 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Nunito:wght@900&family=Ubuntu:ital,wght@1,700&display=swap');
+
+:root{
+  --white-pink: #DCD7C9;
+  --brown: #A27B5C;
+  --space-light: #3F4E4F;
+  --space-dark: #2C3639;
+}
+
+body{
+  background-color: var(--white-pink);
+}
+
+h1, label, .day-container, input, select, button{
+  font-family: 'Nunito', sans-serif;
+  color: var(--space-dark);
+}
+
+button{
+  background-color: var(--white-pink);
+  width: 10%;
+  margin-top: 10px;
+  border-width: thin;
+
+}
+
+button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0px 2px 5px;
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
+  font-size: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .week-container {
   display: flex;
@@ -45,4 +44,23 @@
 .day-container {
   flex: 1;
   flex-direction: column;
+  border-color: var(--brown);
+  border-style: solid;
+  border-width: medium;
+}
+
+.single-task {
+  font-size: 0.875em;
+}
+
+.start-container, .end-container{
+  display: grid;
+  grid-template-columns: 80px 100px 20px;
+  margin-left: 40%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.icon{
+  cursor: pointer;
 }

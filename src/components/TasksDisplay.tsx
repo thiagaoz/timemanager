@@ -10,7 +10,7 @@ interface Props {
 
 const TasksDisplay = ({tasks, setTasks, dayTasks}: Props) => {
 
-    return <div>
+    return <div className='single-task'>
         {dayTasks.map( task =>
             <SingleTask task={task} key={task.id} tasks={tasks} setTasks={setTasks}></SingleTask>
         )}

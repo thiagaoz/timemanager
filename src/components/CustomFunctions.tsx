@@ -82,11 +82,11 @@ export function deleteTask(id: number, taskArray:Task[]): Task[] {
     return(filteredTasks);
 };
 
-const almoço: Task = new Task('Almoço', 2, '12:00', 2, '13:00')
-almoço.id = 1;
-const janta: Task = new Task('Janta', 5, '18:00', 5, '19:00')
-janta.id = 2;
-const arr = [almoço, janta]
-const viagem: Task = new Task('Viagem BSB', 2, '22:00', 3, '06:00')
-setChildrenTask(viagem);
-export var testArr = sortTasks(viagem, arr)
+const lunch: Task = new Task('Lunch', 2, '12:00', 2, '13:00')
+lunch.id = 1;
+const dinner: Task = new Task('Dinner', 5, '18:00', 5, '19:00')
+dinner.id = 2;
+const arr = [lunch, dinner]
+const trip: Task = new Task('Car trip', 2, '22:00', 3, '06:00')
+setChildrenTask(trip);
+export var testArr = sortTasks(trip, arr)

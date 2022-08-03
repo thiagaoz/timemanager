@@ -32,8 +32,12 @@ function App() {
 
   return (
     <div className="App">
-      Hello World
-      <AddTaskBar tasks={tasks} setTasks={setTasks} ></AddTaskBar>
+      <h1>TIME MANAGER</h1>
+      <div className='add-taskbar'>
+        <AddTaskBar tasks={tasks} setTasks={setTasks} ></AddTaskBar>
+        <br></br>
+        <br></br>
+      </div>
 
       {tasks.length === 0 ? 
         <h1>No tasks</h1>
